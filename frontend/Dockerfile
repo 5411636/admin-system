@@ -4,9 +4,11 @@ FROM node:18-alpine AS builder
 WORKDIR /app
 
 COPY package*.json ./
+COPY vite.config.js ./
 RUN npm ci
 
 COPY src/ ./src/
+COPY index.html ./
 RUN npm run build
 
 # Nginx stage
