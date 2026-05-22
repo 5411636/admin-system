@@ -14,16 +14,16 @@ jobs:
 
       - name: Create SSH key file
         run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.SERVER_SSH_KEY }}" | base64 -d > ~/.ssh/key
-          chmod 600 ~/.ssh/key
+          mkdir -p $HOME/.ssh
+          echo "${{ secrets.SERVER_SSH_KEY }}" | base64 -d > $HOME/.ssh/key
+          chmod 600 $HOME/.ssh/key
 
       - name: Deploy to server
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.SERVER_HOST }}
           username: ${{ secrets.SERVER_USER }}
-          key_path: ~/.ssh/key
+          key_path: $HOME/.ssh/key
           port: 22
           script: |
             cd /root/admin-system
